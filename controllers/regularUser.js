@@ -36,18 +36,19 @@ exports.signUp = (req, res) => {
           nextOfKinFullname,
           nextOfKinAddress,
           nextOfKinPhoneNumber
-          });
+        });
         return ruser.save();
-  })
-      .then((regularUser) => {
+})
+    .then((regularUser) => {
           if (regularUser) {
-            res.status(201).send({
+          res.status(201).send({
             status: true,
             message: 'Regular User account successfully created',
             id: regularUser._id
           });
-    }
+  }
       });
+    return
   })
     .catch(
       (error) => {
