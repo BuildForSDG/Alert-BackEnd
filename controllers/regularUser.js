@@ -15,17 +15,17 @@ exports.signUp = (req, res) => {
   } = req.body;
 
   RegularUser.findOne({
-    email
-  }).then((user) => {
+      email
+    }).then((user) => {
       if (user) {
-      return res.status(423).send({
+        return res.status(423).send({
           status: false,
           message: 'This email already exists'
         });
-      } 
+      }
       bcrypt
-          .hash(password, 12)
-          .then((hash) => {
+        .hash(password, 12)
+        .then((hash) => {
           const ruser = new RegularUser({
             fullname,
             bloodType,
@@ -36,20 +36,20 @@ exports.signUp = (req, res) => {
             nextOfKinFullname,
             nextOfKinAddress,
             nextOfKinPhoneNumber
-            });
+          });
           return ruser.save();
-          })
+        })
         .then((regularUser) => {
           if (regularUser) {
             res.status(201).send({
               status: true,
               message: 'Regular User account successfully created',
               id: reguarUser._id
-              });
-            }
-          });
-     
-  })
+            });
+          }
+        });
+
+    })
     .catch(
       (error) => {
         res.status(500).json({
