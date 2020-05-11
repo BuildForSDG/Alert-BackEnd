@@ -20,6 +20,12 @@ exports.signUpValidationRules = () => {
     ]
 }
 
+exports.loginValidationRules = () => {
+    return [
+        body("email").notEmpty().isEmail().normalizeEmail().withMessage("Email is required"),
+        body("password").notEmpty().withMessage("Password must not be empty")
+    ]
+}
 
 exports.responderssignUpValidationRules = () => {
     return [
