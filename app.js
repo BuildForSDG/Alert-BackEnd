@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config()
 const mongoose = require("mongoose");
 
-const userRoutes = require('./routes/user');
+const regularUserRoutes = require('./routes/regularUser');
 
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/regularuser', regularUserRoutes);
 
 
 app.use((req, res) => {
