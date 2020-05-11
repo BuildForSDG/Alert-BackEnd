@@ -16,7 +16,7 @@ exports.signUp = (req, res) => {
 
   RegularUser.findOne({
     email
-    }).then((user) => {
+  }).then((user) => {
     if (user) {
       return res.status(423).send({
         status: false,
@@ -38,14 +38,14 @@ exports.signUp = (req, res) => {
           nextOfKinPhoneNumber
           });
         return ruser.save();
-        })
+  })
       .then((regularUser) => {
           if (regularUser) {
             res.status(201).send({
-              status: true,
-              message: 'Regular User account successfully created',
-              id: regularUser._id
-            });
+            status: true,
+            message: 'Regular User account successfully created',
+            id: regularUser._id
+          });
     }
       });
   })
