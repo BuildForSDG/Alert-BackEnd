@@ -15,41 +15,40 @@ exports.signUp = (req, res) => {
   } = req.body;
 
   RegularUser.findOne({
-      email
+    email
     }).then((user) => {
-      if (user) {
-        return res.status(423).send({
-          status: false,
-          message: 'This email already exists'
+    if (user) {
+      return res.status(423).send({
+        status: false,
+        message: 'This email already exists'
         });
       }
-      bcrypt
-        .hash(password, 12)
-        .then((hash) => {
-          const ruser = new RegularUser({
-            fullname,
-            bloodType,
-            email,
-            hash,
-            phoneNumber,
-            address,
-            nextOfKinFullname,
-            nextOfKinAddress,
-            nextOfKinPhoneNumber
+    bcrypt
+      .hash(password, 12)
+      .then((hash) => {
+        const ruser = new RegularUser({
+          fullname,
+          bloodType,
+          email,
+          hash,
+          phoneNumber,
+          address,
+          nextOfKinFullname,
+          nextOfKinAddress,
+          nextOfKinPhoneNumber
           });
-          return ruser.save();
+        return ruser.save();
         })
-        .then((regularUser) => {
+      .then((regularUser) => {
           if (regularUser) {
             res.status(201).send({
               status: true,
               message: 'Regular User account successfully created',
-              id: reguarUser._id
+              id: regularUser._id
             });
-          }
-        });
-
-    })
+    }
+      });
+  })
     .catch(
       (error) => {
         res.status(500).json({
