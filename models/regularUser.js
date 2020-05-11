@@ -8,7 +8,7 @@ const regularUserSchema = mongoose.Schema({
   bloodType: {
     type: String,
     required: true,
-    enum: ["-A", "B", "AB", "O"]
+    enum: ['-A', 'B', 'AB', 'O']
   },
   email: {
     type: String,
@@ -38,11 +38,11 @@ const regularUserSchema = mongoose.Schema({
   nextOfKinPhoneNumber: {
     type: String,
     required: true
-  },
+  }
 
 }, {
   timestamps: true
-})
+});
 
 
 module.exports = mongoose.model('RegularUser', regularUserSchema);
