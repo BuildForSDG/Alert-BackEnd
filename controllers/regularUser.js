@@ -26,7 +26,7 @@ exports.signUp = (req, res) => {
     console.log("here");
     bcrypt
       .hash(password, 12)
-      .then((hash) => {
+      .then((password) => {
       const ruser = new RegularUser({
         fullname,
         bloodType,
