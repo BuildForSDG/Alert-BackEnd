@@ -17,27 +17,27 @@ exports.signUp = (req, res) => {
   RegularUser.findOne({
       email
     }).then((user) => {
-      if (user) {
+    if (user) {
         return res.status(423).send({
-          status: false,
-          message: 'This email already exists'
+        status: false,
+        message: 'This email already exists'
         });
-      } else {
-        bcrypt
-          .hash(password, 12)
-          .then((hash) => {
-            const user = new RegularUser({
-              fullname,
-              bloodType,
-              email,
-              hash,
-              phoneNumber,
-              address,
-              nextOfKinFullname,
-              nextOfKinAddress,
-              nextOfKinPhoneNumber
+    } else {
+    bcrypt
+        .hash(password, 12)
+        .then((hash) => {
+        const ruser = new RegularUser({
+        fullname,
+        bloodType,
+        email,
+        hash,
+        phoneNumber,
+        address,
+        nextOfKinFullname,
+        nextOfKinAddress,
+        nextOfKinPhoneNumber
             });
-            return user.save();
+            return ruser.save();
           })
           .then((reguarUser) => {
             if (regularUser) {
