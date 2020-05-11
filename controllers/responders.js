@@ -1,20 +1,17 @@
 const bcrypt = require('bcryptjs');
-const RegularUser = require('../models/regularUser');
+const Responder = require('../models/responders.js');
 
 exports.signUp = (req, res) => {
   const {
-    fullname,
-    bloodType,
+    name,
+    type,
     email,
     password,
     phoneNumber,
-    address,
-    nextOfKinFullname,
-    nextOfKinAddress,
-    nextOfKinPhoneNumber
+    address
   } = req.body;
 
-  RegularUser.findOne({email})
+  Responder.findOne({email})
     .then((user) => {
       if (user) {
         return res.status(423).send({
@@ -22,29 +19,25 @@ exports.signUp = (req, res) => {
           message: 'This email already exists'
         });
       }
-    console.log("here");
     bcrypt
       .hash(password, 12)
       .then((hash) => {
-      const ruser = new RegularUser({
-        fullname,
-        bloodType,
+      const responder = new Responder({
+        name,
+        type,
         email,
-        password:hash,
+        password,
         phoneNumber,
-        address,
-        nextOfKinFullname,
-        nextOfKinAddress,
-        nextOfKinPhoneNumber
+        address
       });
-      return ruser.save();
+      return responder.save();
       })
-      .then((regularUser) => {
-        if (regularUser) {
+      .then((user) => {
+        if (user) {
           res.status(201).send({
             status: true,
-            message: 'Regular User account successfully created',
-            id: regularUser._id
+            message: 'Responder account successfully created',
+            id: user._id
           });
         }
       });
