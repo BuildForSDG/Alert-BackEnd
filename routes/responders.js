@@ -7,6 +7,6 @@ const userController = require('../controllers/responders');
 
 
 router.post('/signup', validation.responderssignUpValidationRules(), validation.validate, userController.signUp);
-
+router.post('/login', validation.loginValidationRules(), validation.validate, userController.login);
 
 module.exports = router;
