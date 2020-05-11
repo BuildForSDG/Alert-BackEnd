@@ -1,18 +1,18 @@
-const RegularUser = require("../models/regularUser");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const RegularUser = require('../models/regularUser');
 
-exports.signUp = (req, res, next) => {
+exports.signUp = (req, res) => {
   const {
     fullname,
-    blood_type,
+    bloodType,
     email,
     password,
-    phone_number,
+    phoneNumber,
     address,
-    next_of_kin_fullname,
-    next_of_kin_address,
-    next_of_kin_phone_number
+    nextOfKinFullname,
+    nextOfKinAddress,
+    nextOfKinPhoneNumber
   } = req.body
   RegularUser.findOne({
       email,
@@ -20,7 +20,7 @@ exports.signUp = (req, res, next) => {
       if (user) {
         return res.status(423).send({
           status: false,
-          message: "This email already exists",
+          message: 'This email already exists',
         });
       } else {
         bcrypt
@@ -28,14 +28,14 @@ exports.signUp = (req, res, next) => {
           .then((password) => {
             let user = new RegularUser({
               fullname,
-              blood_type,
+              bloodType,
               email,
               password,
-              phone_number,
+              phoneNumber,
               address,
-              next_of_kin_fullname,
-              next_of_kin_address,
-              next_of_kin_phone_number
+              nextOfKinFullname,
+              nextOfKinAddress,
+              nextOfKinPhoneNumber
             });
             return user.save();
           })
@@ -43,7 +43,7 @@ exports.signUp = (req, res, next) => {
             if (user) {
               res.status(201).send({
                 status: true,
-                message: "Regular User account successfully created",
+                message: 'Regular User account successfully created',
                 id: user._id,
               })
             }

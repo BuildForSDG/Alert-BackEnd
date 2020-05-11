@@ -5,7 +5,7 @@ const regularUserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  blood_type: {
+  bloodType: {
     type: String,
     required: true,
     enum: ["-A", "B", "AB", "O"]
@@ -19,7 +19,7 @@ const regularUserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  phone_number: {
+  phoneNumber: {
     type: String,
     required: true
   },
@@ -27,15 +27,15 @@ const regularUserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  next_of_kin_fullname: {
+  nextOfKinFullname: {
     type: String,
     required: true
   },
-  next_of_kin_address: {
+  nextOfKinAddress: {
     type: String,
     required: true
   },
-  next_of_kin_phone_number: {
+  nextOfKinPhoneNumber: {
     type: String,
     required: true
   },
