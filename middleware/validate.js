@@ -20,6 +20,19 @@ exports.signUpValidationRules = () => {
     ]
 }
 
+exports.updateValidationRules = () => {
+    return [
+        // username must be an email
+        body("fullname").notEmpty().trim().escape().withMessage("Full name must not be empty"),
+        body("phoneNumber").notEmpty().trim().escape().withMessage("Phone Number must not be empty"),
+        body("email").notEmpty().isEmail().normalizeEmail().withMessage("Email is required"),
+        body("address").notEmpty().trim().escape().withMessage("Address must not be empty"),
+        body("nextOfKinFullname").notEmpty().trim().escape().withMessage("Next of kin fullname must not be empty"),
+        body("nextOfKinAddress").notEmpty().trim().escape().withMessage("Next of kin fullname must not be empty"),
+        body("nextOfKinPhoneNumber").notEmpty().trim().escape().withMessage("Next of kin fullname must not be empty"),
+    ]
+}
+
 exports.loginValidationRules = () => {
     return [
         body("email").notEmpty().isEmail().normalizeEmail().withMessage("Email is required"),
@@ -40,6 +53,8 @@ exports.responderssignUpValidationRules = () => {
         body("address").notEmpty().trim().escape().withMessage("Address must not be empty")
     ]
 }
+
+
 
 exports.validate = (req, res, next) => {
     try {

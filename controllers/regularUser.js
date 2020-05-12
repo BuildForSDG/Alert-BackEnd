@@ -31,7 +31,7 @@ exports.signUp = (req, res) => {
         fullname,
         bloodType,
         email,
-        password:hash,
+        password,
         phoneNumber,
         address,
         nextOfKinFullname,
@@ -119,4 +119,47 @@ exports.getDetails = (req, res) => {
           });
       }
   )
+}
+
+exports.updateDetails = (req, res) => {
+  const user_id = req.params.id;
+    const {
+      fullname,
+      email,
+      phoneNumber,
+      address,
+      nextOfKinFullname,
+      nextOfKinAddress,
+      nextOfKinPhoneNumber
+    } = req.body;
+    const filter = {
+        _id: user_id
+    };
+    const update = {
+      fullname,
+      email,
+      phoneNumber,
+      address,
+      nextOfKinFullname,
+      nextOfKinAddress,
+      nextOfKinPhoneNumber
+    };
+    RegularUser.findOneAndUpdate(filter, update, {
+        new: true
+    }).then((user) => {
+        if (user) {
+            return res.status(201).send({
+                status: true,
+                message: "User details was updated successfully",
+                name: user.name,
+                id: user._id,
+            });
+        }
+    }).catch(
+        (error) => {
+            res.status(500).json({
+                error: error
+            });
+        }
+    )
 }
