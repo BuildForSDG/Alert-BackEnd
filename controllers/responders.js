@@ -113,3 +113,40 @@ exports.getDetails = (req, res) => {
       }
   )
 }
+
+exports.updateDetails = (req, res) => {
+  const user_id = req.params.id;
+    const {
+      name,
+      email,
+      phoneNumber,
+      address,
+    } = req.body;
+    const filter = {
+        _id: user_id
+    };
+    const update = {
+      name,
+      email,
+      phoneNumber,
+      address,
+    };
+    Responder.findOneAndUpdate(filter, update, {
+        new: true
+    }).then((user) => {
+        if (user) {
+            return res.status(201).send({
+                status: true,
+                message: "User details was updated successfully",
+                name: user.name,
+                id: user._id,
+            });
+        }
+    }).catch(
+        (error) => {
+            res.status(500).json({
+                error: error
+            });
+        }
+    )
+}
