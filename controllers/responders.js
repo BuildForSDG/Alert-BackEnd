@@ -92,3 +92,24 @@ exports.login = (req, res) => {
     });
   })
 }
+
+exports.getDetails = (req, res) => {
+  const user_id = req.params.id;
+  const filter = {
+      _id: user_id
+  };
+  Responder.findOne(filter).then((user) => {
+      if (user) {
+          return res.status(200).send({
+              status: true,
+              data: user
+          });
+      }
+  }).catch(
+      (error) => {
+          res.status(500).json({
+              error
+          });
+      }
+  )
+}
